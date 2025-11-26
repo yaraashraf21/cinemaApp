@@ -40,7 +40,10 @@ class MovieDetailsScreen extends StatelessWidget {
             const SizedBox(height: 16),
             Text(movie.description, style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 16),
-            const Text("Time Slots:", style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+              "Time Slots:",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             Wrap(
               spacing: 10,
               children: movie.timeSlots
