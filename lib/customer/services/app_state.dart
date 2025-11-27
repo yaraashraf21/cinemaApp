@@ -36,3 +36,159 @@ class AppState {
 
   static Map<String, List<Booking>> bookings = {};
 }
+
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import '../models/user.dart';
+// import '../models/movie.dart';
+// import '../models/booking.dart';
+
+// class AppState {
+//   static final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+//   // ===== Users =====
+
+//   // تسجيل الدخول
+//   static Future<User?> loginUser(String email, String password) async {
+//     final snapshot = await _db
+//         .collection('users')
+//         .where('email', isEqualTo: email)
+//         .where('password', isEqualTo: password)
+//         .get();
+
+//     if (snapshot.docs.isEmpty) return null;
+//     final doc = snapshot.docs.first;
+//     return User.fromMap(doc.data());
+//   }
+
+//   // تسجيل مستخدم جديد
+//   static Future<User?> registerUser(String email, String fullName, String password) async {
+//     final existing = await _db.collection('users').where('email', isEqualTo: email).get();
+//     if (existing.docs.isNotEmpty) return null;
+
+//     final docRef = await _db.collection('users').add({
+//       'email': email,
+//       'fullName': fullName,
+//       'password': password,
+//     });
+
+//     final newUserDoc = await docRef.get();
+//     return User.fromMap(newUserDoc.data()!);
+//   }
+
+//   // جلب مستخدم حسب الـ uid (doc id)
+//   static Future<User?> getUser(String userId) async {
+//     final doc = await _db.collection('users').doc(userId).get();
+//     if (!doc.exists) return null;
+//     return User.fromMap(doc.data()!);
+//   }
+
+//   // ===== Movies =====
+
+//   // جلب كل الأفلام
+//   static Future<List<Movie>> getMovies() async {
+//     final snapshot = await _db.collection('movies').get();
+//     return snapshot.docs.map((doc) => Movie.fromMap(doc.data())).toList();
+//   }
+
+//   // ===== Bookings =====
+
+//   // جلب الحجوزات لفيلم معين و timeSlot معين
+//   static Future<List<Booking>> getBookings(String movieId, String timeSlot) async {
+//     final snapshot = await _db
+//         .collection('bookings')
+//         .where('movieId', isEqualTo: movieId)
+//         .where('timeSlot', isEqualTo: timeSlot)
+//         .get();
+
+//     return snapshot.docs.map((doc) => Booking.fromMap(doc.data())).toList();
+//   }
+
+//   // إضافة حجز جديد
+//   static Future<void> createBooking(Booking booking) async {
+//     await _db.collection('bookings').add(booking.toMap());
+//   }
+// }
+
+//واحد تانى بيقول  اصح
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import '../models/user.dart';
+// import '../models/movie.dart';
+// import '../models/booking.dart';
+
+// class AppState {
+//   static final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+//   // ===== Users =====
+//   static Future<User?> loginUser(String email, String password) async {
+//     final snapshot = await _db
+//         .collection('users')
+//         .where('email', isEqualTo: email)
+//         .where('password', isEqualTo: password)
+//         .get();
+
+//     if (snapshot.docs.isEmpty) return null;
+//     final doc = snapshot.docs.first;
+//     return User.fromMap({
+//       ...doc.data(),
+//       'id': doc.id, // إضافة الـ docId
+//     });
+//   }
+
+//   static Future<User?> registerUser(String email, String fullName, String password) async {
+//     final existing = await _db.collection('users').where('email', isEqualTo: email).get();
+//     if (existing.docs.isNotEmpty) return null;
+
+//     final docRef = await _db.collection('users').add({
+//       'email': email,
+//       'fullName': fullName,
+//       'password': password,
+//     });
+
+//     final newUserDoc = await docRef.get();
+//     return User.fromMap({
+//       ...newUserDoc.data()!,
+//       'id': newUserDoc.id,
+//     });
+//   }
+
+//   static Future<User?> getUser(String userId) async {
+//     final doc = await _db.collection('users').doc(userId).get();
+//     if (!doc.exists) return null;
+//     return User.fromMap({
+//       ...doc.data()!,
+//       'id': doc.id,
+//     });
+//   }
+
+//   // ===== Movies =====
+//   static Future<List<Movie>> getMovies() async {
+//     final snapshot = await _db.collection('movies').get();
+//     return snapshot.docs.map((doc) => Movie.fromMap({
+//       ...doc.data(),
+//       'id': doc.id, // docId أو رقم
+//     })).toList();
+//   }
+
+//   // ===== Bookings =====
+//   static Future<List<Booking>> getBookings(String movieId, String timeSlot) async {
+//     final snapshot = await _db
+//         .collection('bookings')
+//         .where('movieId', isEqualTo: movieId)
+//         .where('timeSlot', isEqualTo: timeSlot)
+//         .get();
+
+//     return snapshot.docs.map((doc) => Booking.fromMap({
+//       ...doc.data(),
+//       'id': doc.id,
+//     })).toList();
+//   }
+
+//   static Future<Booking?> createBooking(Booking booking) async {
+//     final docRef = await _db.collection('bookings').add(booking.toMap());
+//     final newBookingDoc = await docRef.get();
+//     return Booking.fromMap({
+//       ...newBookingDoc.data()!,
+//       'id': newBookingDoc.id,
+//     });
+//   }
+// }
